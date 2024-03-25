@@ -1,0 +1,51 @@
+{
+  "name": "sdfaasd",
+  "stats": {
+    "lux": { "lastMonth": [0], "lastHour": [0], "lastWeek": [0] },
+    "capacity": { "lastMonth": [0], "lastWeek": [0], "lastHour": [0] },
+    "voltage": { "lastMonth": [0], "lastHour": [0], "lastWeek": [0] },
+    "current": { "lastHour": [0], "lastMonth": [0], "lastWeek": [0] },
+    "power": { "lastHour": [0], "lastWeek": [0], "lastMonth": [0] },
+    "temp": { "lastMonth": [0], "lastHour": [0], "lastWeek": [0] }
+  },
+  "settings": {
+    "floatCharge": 0,
+    "dischargeCurrent": 0,
+    "onTime": {
+      "endHour": 0,
+      "startHour": 0,
+      "endMinutes": 0,
+      "startMinutes": 0
+    },
+    "limit": {
+      "power": { "max": 0, "min": 0 },
+      "current": { "max": 0, "min": 0 },
+      "temp": { "min": 0, "max": 0 },
+      "lux": { "max": 0, "min": 0 },
+      "capacity": { "max": 0, "min": 0 },
+      "voltage": { "max": 0, "min": 0 }
+    },
+    "chargeReconnect": 2,
+    "batteryVoltage": 8,
+    "dischargeStop": 0,
+    "dischargeReconnect": 0,
+    "toggle": true,
+    "chargeCurrent": 8
+  },
+  "readings": {
+    "temp": 3,
+    "current": 2,
+    "capacity": 13,
+    "lux": 0,
+    "voltage": 6,
+    "mode": "",
+    "power": 2
+  },
+  "details": {
+    "lat": -6.873114963626264,
+    "lng": 109.11399953003752,
+    "status": "normal",
+    "type": "Solar"
+  },
+  "id": "NunbVVo0MO1HScoDir60"
+}
