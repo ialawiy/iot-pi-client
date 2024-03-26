@@ -1,1 +1,0 @@
-npm install express ws ngrok ffmpeg-static firebase
