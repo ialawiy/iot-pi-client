@@ -1,0 +1,1 @@
+Download dan jalankan ./install.sh di terminal
