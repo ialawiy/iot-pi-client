@@ -5,6 +5,10 @@
 # Based on script by Richard Stanley @ https://github.com/audstanley/Node-MongoDb-Pi/
 # This is for a RaspberryPi Zero but should work across all models.
 sudo -i
+sudo apt-get update --allow-releaseinfo-change
+sudo apt-get upgrade
+
+export NODE_OPTIONS=--max-old-space-size=512    
 VERSION=v16.20.2;
 
 # Creates directory for downloads, and downloads node
@@ -43,3 +47,6 @@ sudo ln -s /opt/nodejs/bin/npx /usr/bin/npx;
 sudo ln -s /opt/nodejs/bin/npx /usr/sbin/npx;
 sudo ln -s /opt/nodejs/bin/npx /sbin/npx;
 sudo ln -s /opt/nodejs/bin/npx /usr/local/bin/npx;
+
+npm install -g firebase
+node js-client.js

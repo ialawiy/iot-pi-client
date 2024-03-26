@@ -3,7 +3,7 @@ const firebase = require('firebase/compat/app');
 require('firebase/compat/auth');
 require('firebase/compat/firestore');
 const fs = require('fs');
-/* 
+
 const express = require('express');
 const WebSocket = require('ws');
 const { spawn } = require('child_process');
@@ -53,7 +53,7 @@ const startServer = async () => {
   console.log(`ngrok tunnel set up: ${url}`);
 };
 
-startServer(); */
+startServer(); 
 
 const EMAIL = 'd@d.com';
 const PASS = '11111111';
