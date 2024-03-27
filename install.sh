@@ -2,13 +2,20 @@
 #!/bin/bash
 # By Steven de Salas
 
+# free -m
+# fallocate -l 4G /swapfile
+# chmod 600 /swapfile
+# mkswap /swapfile
+# swapon /swapfile
+# echo “/swapfile none swap sw 0 0” | sudo tee -a /etc/fstab
+
 # Based on script by Richard Stanley @ https://github.com/audstanley/Node-MongoDb-Pi/
 # This is for a RaspberryPi Zero but should work across all models.
 sudo -i
 sudo apt-get update --allow-releaseinfo-change
 sudo apt-get upgrade
 
-export NODE_OPTIONS=--max-old-space-size=512    
+export NODE_OPTIONS=--max-old-space-size=250    
 VERSION=v16.20.2;
 
 # Creates directory for downloads, and downloads node
