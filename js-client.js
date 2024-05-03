@@ -6,7 +6,7 @@ let tempData = {};
 const config = {
   EMAIL: 'd@d.com',
   PASS: '11111111',
-  DEVICE_ID: 'Jcbl1aVnecA3n64oNPFO',
+  DEVICE_ID: 'cO10u4reIvV26nm3WXZP',
   pipe: 'pipe.json',
   firebaseConfig: {
     apiKey: "AIzaSyCrL7BWWC_vI3nqvTLjOFYjLlJunHAoM5E",
