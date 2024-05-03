@@ -1,0 +1,95 @@
+import json
+import threading
+import time
+
+toggled = False
+json_data = {}
+
+def modify_json(data, path_to_field, new_value):
+    """Modify a specific field in a JSON object."""
+    keys = path_to_field.split('.')
+    temp = data
+    for key in keys[:-1]:
+        if key.isdigit():  # Check if the key is a digit, then use it as an index
+            key = int(key)
+        temp = temp[key]
+    last_key = keys[-1]
+    if last_key.isdigit():
+        last_key = int(last_key)
+    temp[last_key] = new_value
+
+
+def save_json(file_path, data):
+    """Save the JSON object to a file."""
+    try:
+        with open(file_path, 'w') as file:
+            json.dump(data, file, indent=4)
+    except FileNotFoundError:
+        print(f"File {file_path} not found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+
+def read_file_content(file_path):
+    """Read and return the file content, None if file not found."""
+    try:
+        with open(file_path, 'r') as file:
+            return file.read()
+    except FileNotFoundError:
+        print(f"File {file_path} not found.")
+        return None
+
+def has_file_content_changed(file_path, last_content):
+    """Check if the file's content has changed."""
+    current_content = read_file_content(file_path)
+    return current_content != last_content, current_content
+
+def check_updates_refresh_json_data(file_path):
+    """Check if settings.toggleUpdate is true in the JSON file."""
+    content = read_file_content(file_path)
+    if content:
+        global json_data
+        try:
+            json_data = json.loads(content)
+            return json_data.get('settings', {}).get('toggleUpdate', False)
+        except json.JSONDecodeError:
+            print("Error decoding the JSON file.")
+    return False
+
+def watch_file(file_path, interval=1):
+    """Watches a file for content changes and toggleUpdates status."""
+    last_content = read_file_content(file_path)
+    if last_content is None:
+        return
+
+    while True:
+        changed, last_content = has_file_content_changed(file_path, last_content)
+        if changed:
+            print(f"File {file_path} content has been modified.")
+            global toggled
+            if check_updates_refresh_json_data(file_path):
+                toggled = True
+                # Modify the json here
+                print("settings.toggleUpdate is enabled.")
+                # Modify the JSON object as needed
+                modify_json(json_data, 'stats.monthly.powerProduction.2', 10)
+                modify_json(json_data, 'settings.toggleUpdate', False)
+                # Save the changes to the file
+                save_json(file_path, json_data)
+            else:
+                toggled = False
+                
+        time.sleep(interval)
+
+def start_watching(file_path):
+    """Starts watching the file on a separate thread."""
+    threading.Thread(target=watch_file, args=(file_path,), daemon=True).start()
+    print(f"Started watching {file_path} on a separate thread.")
+
+if __name__ == "__main__":
+    file_to_watch = "pipe.json"
+    start_watching(file_to_watch)
+    # Main program continues here
+    while True:
+        print(toggled)
+        time.sleep(3)
