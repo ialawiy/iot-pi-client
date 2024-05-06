@@ -98,6 +98,9 @@ def log_readings():
     
     data['stats']['curveIV']['voltage'] = V_buffer
     data['stats']['curveIV']['current'] = I_buffer
+    data['details']['lastUpdate'] = datetime.now()
+    
+    data['settings']['toggleUpdate'] = False
     
     # Write the modified data back to the file
     with open('pipe.json', 'w') as file:
@@ -126,6 +129,7 @@ def log_daily_stats():
         data['stats']['daily']['panelVoltage'][five_minutes] = tegangan1    # Write the modified data back to the file
         
         data['settings']['toggleUpdate'] = False    # Write the modified data back to the file
+        data['details']['lastUpdate'] = now
         
         with open('pipe.json', 'w') as file:
             json.dump(data, file, indent=4)
@@ -148,7 +152,7 @@ def log_monthly_stats():
     if(now.day%2):
         date += 31
         evenDay = True
-    
+    data['details']['lastUpdate'] = now
     data['stats']['monthly']['powerProduction'][date] = multiply_and_sum(split_and_return(data['stats']['daily']['panelVoltage'], evenDay), split_and_return(data['stats']['daily']['panelCurrent'], evenDay))
     data['stats']['monthly']['batteryCharge'][date] = multiply_and_sum(split_and_return(data['stats']['daily']['batteryVoltage'], evenDay), split_and_return(data['stats']['daily']['batteryVoltage'], evenDay))
     with open('pipe.json', 'w') as file:
@@ -209,7 +213,7 @@ def watch_file(file_path, interval=1):
                 print("settings.toggleUpdate is enabled.")
                 log_readings()
                 # Save the changes to the file
-                save_json(file_path, json_data)
+                # save_json(file_path, json_data)
             else:
                 toggled = False
                 
