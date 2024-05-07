@@ -55,5 +55,7 @@ sudo ln -s /opt/nodejs/bin/npx /usr/sbin/npx;
 sudo ln -s /opt/nodejs/bin/npx /sbin/npx;
 sudo ln -s /opt/nodejs/bin/npx /usr/local/bin/npx;
 
+pip install schedule
+
 npm install -g firebase
 node js-client.js
